@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: white;
+  font-family: "Open Sans", sans-serif;
+}
+
+:root {
+  --mercuryColor: #888888;
+  --venusColor: #e7cdcd;
+  --earthColor: #428ed4;
+  --marsColor: #ef5f5f;
+  --jupiterColor: #e29468;
+  --saturnColor: #c7aa72;
+  --uranusColor: #c9d4f1;
+  --neptuneColor: #7a91a7;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    152deg,
+    rgba(26, 42, 38, 1) 0%,
+    rgba(12, 22, 77, 1) 0%,
+    rgba(25, 11, 34, 1) 100%
+  );
+}
+
+#solar-system {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 500px;
+}
+
+.planet {
+  border-radius: 50%; /* Gör planeterna cirkulära */
+  position: absolute;
+}
+
+#sun {
+  width: 40rem;
+  height: 40rem;
+  background-color: rgba(255, 191, 0, 0.94);
+  margin-left: calc(-50rem + 50vw);
+  box-shadow: 5px 2px 55px yellow;
+}
+
+/************ Här sorterar vi planeterna efter solen *********/
+
+.planets-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 100px;
+}
+
+#mercury {
+  left: calc(0% + 200px);
+  width: 14px;
+  height: 14px;
+  background-color: var(--mercuryColor);
+}
+
+#venus {
+  left: calc(0% + 300px);
+  width: 26px;
+  height: 26px;
+  background-color: var(--venusColor);
+}
+
+#earth {
+  left: calc(0% + 400px);
+  width: 32px;
+  height: 32px;
+  background-color: var(--earthColor);
+}
+
+#mars {
+  left: calc(0% + 500px);
+  width: 14px;
+  height: 14px;
+  background-color: var(--marsColor);
+}
+
+#jupiter {
+  left: calc(0% + 600px);
+  width: 188px;
+  height: 188px;
+  background-color: var(--jupiterColor);
+}
+
+#saturn {
+  left: calc(0% + 900px);
+  width: 144px;
+  height: 144px;
+  background-color: var(--saturnColor);
+}
+
+/* Saturnus ring. */
+#saturn::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* placera ringen mitt på planeten */
+  left: 50%; /* placera ringen mitt på planeten */
+  width: var(--saturnRingWidth, 255px); /* Standardstorlek för ringen */
+  height: var(--saturnRingHeight, 5px); /* Standardstorlek för ringen */
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transform-origin: center;
+  transform: translate(-50%, 0%) rotate(-45deg);
+}
+
+#uranus {
+  left: calc(0% + 1150px);
+  width: 66px;
+  height: 66px;
+  background-color: var(--uranusColor);
+}
+
+#neptune {
+  left: calc(0% + 1300px);
+  width: 66px;
+  height: 66px;
+  background-color: var(--neptuneColor);
+}
+/* ******************************************************************* */
