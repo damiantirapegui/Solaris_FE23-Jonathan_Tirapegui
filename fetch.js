@@ -17,7 +17,7 @@ export async function fetchApiKey() {
     console.log(error);
   }
 }
-
+// Hämtar planeterna och deras information i denna async funktionen.
 export async function fetchData() {
   try {
     const apiKey = await fetchApiKey();
@@ -29,6 +29,7 @@ export async function fetchData() {
       }
     );
     const { bodies } = await resp.json();
+    // Loopa igenom alla planeter för att kunna sortera dem i updatePlanet funktionen
     for (let i = 0; i < bodies.length; i++) {
       addClickListenersToPlanets(bodies[i], planets[i]);
     }
