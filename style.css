@@ -17,6 +17,7 @@
   --saturnColor: #c7aa72;
   --uranusColor: #c9d4f1;
   --neptuneColor: #7a91a7;
+  --undertitleColor: #ffd029;
 }
 
 body {
@@ -30,86 +31,145 @@ body {
   );
 }
 
-#solar-system {
+header {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  align-items: flex-end;
+  /* font-size: 3.75rem; */
+  padding: 1.5rem 1.5rem 0;
+}
+
+header,
+p {
+  color: var(--undertitleColor);
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 1rem;
+}
+
+.title-containter {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.search-container {
+  display: flex;
   width: 100%;
-  padding-top: 500px;
+  justify-content: start;
+  align-items: center;
+  padding: 0 0 2rem 30rem;
+}
+
+#search-planet {
+  background: linear-gradient(
+    152deg,
+    rgba(26, 42, 38, 1) 0%,
+    rgba(12, 22, 77, 1) 0%,
+    rgba(25, 11, 34, 1) 2%
+  );
+  background-clip: text;
+  color: white;
+  border: none;
+  border-bottom: 2px solid white;
+  width: 20rem;
+  font-size: 20px;
+  text-align: center;
+  outline: none;
+}
+/* Visar felmeddelande om planet ej kunde hittas i sökfält */
+.error-message {
+  color: red;
+  letter-spacing: normal;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#search-planet:focus::placeholder {
+  color: transparent;
+}
+
+/* Design för mina planeter */
+#sun {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background-color: var(--undertitleColor);
+  transform: translate(-130%, 0%);
 }
 
 .planet {
-  border-radius: 50%; /* Gör planeterna cirkulära */
-  position: absolute;
+  border-radius: 50%;
 }
-
-#sun {
-  width: 40rem;
-  height: 40rem;
-  background-color: rgba(255, 191, 0, 0.94);
-  margin-left: calc(-50rem + 50vw);
-  box-shadow: 5px 2px 55px yellow;
-}
-
-/************ Här sorterar vi planeterna efter solen *********/
 
 .planets-container {
-  position: relative;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 100px;
+  width: 100%;
+  height: 75%;
+  position: fixed;
+  z-index: 3;
 }
 
 #mercury {
-  left: calc(0% + 200px);
+  position: absolute;
+  left: 25rem;
   width: 14px;
   height: 14px;
   background-color: var(--mercuryColor);
+  /* margin-right: 110rem; */
 }
 
 #venus {
-  left: calc(0% + 300px);
+  position: absolute;
+  left: 30rem;
   width: 26px;
   height: 26px;
   background-color: var(--venusColor);
 }
 
 #earth {
-  left: calc(0% + 400px);
+  position: absolute;
+  left: 35rem;
   width: 32px;
   height: 32px;
   background-color: var(--earthColor);
 }
 
 #mars {
-  left: calc(0% + 500px);
+  position: absolute;
+  left: 40rem;
   width: 14px;
   height: 14px;
   background-color: var(--marsColor);
 }
 
 #jupiter {
-  left: calc(0% + 600px);
+  position: absolute;
+  left: 45rem;
   width: 188px;
   height: 188px;
   background-color: var(--jupiterColor);
 }
 
 #saturn {
-  left: calc(0% + 900px);
+  position: absolute;
+  left: 62rem;
   width: 144px;
   height: 144px;
   background-color: var(--saturnColor);
 }
 
-/* Saturnus ring. */
 #saturn::after {
   content: "";
   position: absolute;
-  top: 50%; /* placera ringen mitt på planeten */
-  left: 50%; /* placera ringen mitt på planeten */
-  width: var(--saturnRingWidth, 255px); /* Standardstorlek för ringen */
-  height: var(--saturnRingHeight, 5px); /* Standardstorlek för ringen */
+  top: 50%;
+  left: 50%;
+  width: var(--saturnRingWidth, 255px);
+  height: var(--saturnRingHeight, 5px);
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   transform-origin: center;
@@ -117,16 +177,131 @@ body {
 }
 
 #uranus {
-  left: calc(0% + 1150px);
+  position: absolute;
+  left: 75rem;
   width: 66px;
   height: 66px;
   background-color: var(--uranusColor);
 }
 
 #neptune {
-  left: calc(0% + 1300px);
+  position: absolute;
+  left: 83rem;
   width: 66px;
   height: 66px;
   background-color: var(--neptuneColor);
 }
-/* ******************************************************************* */
+
+/* ****************************************************************************** */
+/* Overlaykortet */
+
+.planet-card-body {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.planet-card {
+  background-color: #1a104e;
+  z-index: 999;
+  width: 95%;
+  position: absolute;
+  color: white;
+  display: block;
+  max-height: 100%;
+  /* overflow: hidden; */
+}
+
+.planet-to-card {
+  position: relative;
+  left: -35rem;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 1001;
+}
+
+/* Saturnus ring till overlaykortet */
+.planet-to-card::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--saturnRingWidth, 380px);
+  height: var(--saturnRingHeight, 10px);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  /* transform-origin: center; */
+  transform: translate(-50%, 0%) rotate(-45deg);
+  z-index: 1002;
+  display: none;
+}
+
+.show-saturn-ring::after {
+  display: block !important; /* Visa ringen när klassen är aktiv */
+}
+
+.card-title-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-title-flex {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+
+.planet-description {
+  color: white;
+  letter-spacing: normal;
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 1.7rem;
+}
+
+.grid-box {
+  display: grid;
+  grid-template-columns: repeat(2, 10rem);
+  column-gap: 5%;
+  row-gap: 3rem;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.card-undertitle {
+  font-size: 1.5rem;
+  color: var(--undertitleColor);
+  font-weight: 300;
+  letter-spacing: 1rem;
+}
+
+#card-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.2rem;
+}
+
+.category-value {
+  color: white;
+  letter-spacing: normal;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.category-value-moon {
+  color: white;
+  letter-spacing: normal;
+  font-size: 1rem;
+  font-weight: 100;
+  width: 40rem;
+  word-wrap: break-word;
+}

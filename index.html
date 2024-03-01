@@ -5,31 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solsystemet</title>
     <link rel="stylesheet" href="style.css" />
+    <script type="module" src="index.js"></script>
   </head>
   <body>
-    <!-- Solsystemet -->
-    <div id="solar-system">
+    <header>
+      <div class="search-container">
+        <input id="search-planet" type="text" placeholder="Search planet" />
+      </div>
+      <div class="title-containter">
+        <h1>SOLSYSTEMET</h1>
+        <p class="undertitle">SOLARIS</p>
+      </div>
+    </header>
+
+    <main class="planets-container">
       <div id="sun" class="planet"></div>
 
-      <div class="planets-container">
-        <div id="mercury" class="planet"></div>
+      <div id="mercury" class="planet"></div>
 
-        <div id="venus" class="planet"></div>
+      <div id="venus" class="planet"></div>
 
-        <div id="earth" class="planet"></div>
+      <div id="earth" class="planet"></div>
 
-        <div id="mars" class="planet"></div>
+      <div id="mars" class="planet"></div>
 
-        <div id="jupiter" class="planet"></div>
+      <div id="jupiter" class="planet"></div>
 
-        <div id="saturn" class="planet"></div>
+      <div id="saturn" class="planet"></div>
 
-        <div id="uranus" class="planet"></div>
+      <div id="uranus" class="planet"></div>
 
-        <div id="neptune" class="planet"></div>
+      <div id="neptune" class="planet"></div>
+    </main>
+
+    <aside class="planet-card-body">
+      <div class="planet-to-card"></div>
+      <!--Planet placeholder för kortet. Planetens färger ersätts av javascript -->
+      <div class="planet-card">
+        <div class="card-title-container">
+          <div class="card-title-flex">
+            <h1 id="card-title">JORDEN</h1>
+            <h2 class="card-undertitle">TELLUS</h2>
+            <p class="planet-description"></p>
+          </div>
+        </div>
+
+        <section class="grid-box">
+          <div id="omkrets">
+            <h4 class="category-title">OMKRETS</h4>
+            <p class="category-value omkrets-value"></p>
+          </div>
+
+          <div id="km">
+            <h4 class="category-title">KM FRÅN SOLEN</h4>
+            <p class="category-value km-value"></p>
+          </div>
+          <div id="max-temperatur">
+            <h4 class="category-title">MAX TEMPERATUR</h4>
+            <p class="category-value max-temp-value"></p>
+          </div>
+
+          <div id="min-temperatur">
+            <h4 class="category-title">MIN TEMPERATUR</h4>
+            <p class="category-value min-temp-value"></p>
+          </div>
+
+          <div id="moons">
+            <h4 class="category-title">MÅNAR</h4>
+            <div class="valaue-moon-container">
+              <p class="category-value-moon"></p>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
-
-    <script src="planetsHover.js"></script>
+    </aside>
   </body>
 </html>

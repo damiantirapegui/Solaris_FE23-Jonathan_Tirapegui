@@ -1,4 +1,10 @@
+// MIN MAIN FIL
+
+import { fetchData } from "./fetch.js";
+import { updatePlanetCard } from "./planetCard.js";
+import { fillPlanetOptions, searchPlanetEnter } from "./searchPlanets.js";
 // Summon my plantets
+const sun = document.getElementById("sun");
 const mercury = document.getElementById("mercury");
 const venus = document.getElementById("venus");
 const earth = document.getElementById("earth");
@@ -9,6 +15,10 @@ const neptune = document.getElementById("neptune");
 const saturn = document.getElementById("saturn");
 
 // Colors for my planets.
+const sunColor = getComputedStyle(document.documentElement).getPropertyValue(
+  "--undertitleColor"
+);
+
 const saturnColor = getComputedStyle(document.documentElement).getPropertyValue(
   "--saturnColor"
 );
@@ -37,47 +47,65 @@ const marsColor = getComputedStyle(document.documentElement).getPropertyValue(
   "--marsColor"
 );
 
-const planets = [
+export const planets = [
   {
+    name: "Solen",
+    element: sun,
+    color: sunColor,
+    size: { default: "800px" },
+  },
+  {
+    name: "Merkurius",
     element: mercury,
     color: mercuryColor,
     size: { default: "14px", hover: "20px" },
   },
   {
+    name: "Venus",
     element: venus,
     color: venusColor,
     size: { default: "26px", hover: "36px" },
   },
   {
+    name: "Jorden",
     element: earth,
     color: earthColor,
     size: { default: "32px", hover: "42px" },
   },
-  { element: mars, color: marsColor, size: { default: "14px", hover: "24px" } },
   {
+    name: "Mars",
+    element: mars,
+    color: marsColor,
+    size: { default: "14px", hover: "24px" },
+  },
+  {
+    name: "Jupiter",
     element: jupiter,
     color: jupiterColor,
     size: { default: "188px", hover: "198px" },
   },
   {
+    name: "Saturnus",
+    element: saturn,
+    color: saturnColor,
+    size: { default: "144px", hover: "154px" },
+  },
+  {
+    name: "Uranus",
     element: uranus,
     color: uranusColor,
     size: { default: "66px", hover: "76px" },
   },
 
   {
-    element: saturn,
-    color: saturnColor,
-    size: { default: "144px", hover: "154px" },
-  },
-
-  {
+    name: "Neptunus",
     element: neptune,
     color: neptuneColor,
     size: { default: "66px", hover: "76px" },
   },
 ];
 
+//Ger skugg effekt när användaren hovrar över planeten
 function applyHoverEffect(planet) {
   planet.element.addEventListener("mouseenter", function () {
     planet.element.style.width = planet.size.hover;
@@ -92,4 +120,22 @@ function applyHoverEffect(planet) {
   });
 }
 
+// Lyssna på händelsen när användaren trycker på Enter i sökfältet
+const searchInput = document.getElementById("search-planet");
+searchInput.addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+    const searchTerm = event.target.value;
+    searchPlanetEnter(searchTerm);
+  }
+});
+
+//Exporterat denna klickfunktion då fetchPlanets är beroende av den.
+export function addClickListenersToPlanets(body, planet) {
+  planet.element.addEventListener("click", () => {
+    updatePlanetCard(body);
+  });
+}
+
 planets.forEach(applyHoverEffect);
+fillPlanetOptions();
+fetchData();
